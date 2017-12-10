@@ -26,7 +26,7 @@ This works really well with <a href="https://github.com/wmurphyrd/aframe-super-h
 |vive | Optional | Array of properties to be set when the HTC Vive controller is connected. | The array of properties you specified in _default |
 |gearvr | Optional | Array of properties to be set when the GearVR controller is connected. | The array of properties you specified in _default |
 |windows | Optional | Array of properties to be set when a Windows Mixed Reality controller is connected. | The array of properties you specified in _default |
-|[{"attr": "myComponent", "value": "myComponent's Value"}] | Mandatory | This is the key-value pair of each of the properties specified above. <br/><br/><br/><span style="color:#f44336">Important!</span> Each key-value pair **must be enclosed in double quotes or it won't work**. | No defaults. Must be used |
+|[{"attr": "myComponent", "value": ["myComponent's Value"]}] | Mandatory | This is the key-value pair of each of the properties specified above. <br/><br/><br/><span style="color:#f44336">Important!</span> Each key-value pair **must be enclosed in double quotes or it won't work**. Don't use semicolon `;` inside "value"; have them in separate strings instead!| No defaults. Must be used |
 
 
 ### How to use:
@@ -34,7 +34,7 @@ This works really well with <a href="https://github.com/wmurphyrd/aframe-super-h
 This works by passing a JSON Array to the component, parsing it, and then listening for each `controllerconnected` and `controllerdisconnected` events, and setting it for the right controller. You **must** pass it with the form of:
 
 ```html
-<a-entity responsive='controller:.controller ; _default:[{"attr": "myComponent", "value": "myComponent\'s Value"}]'></a-entity>
+<a-entity responsive='controller:.controller ; _default:[{"attr": "myComponent", "value": ["myComponent\'s Value"]}]'></a-entity>
 ```
 
 #### Note:
@@ -69,6 +69,9 @@ Install and use by directly including the [browser files](dist):
       </a-entity>
 
     <!-- Where the magic happens -->
+    <!-- Oculus will overwrite default when an oculus touch controller is connected. 
+        If any other controller is connected, it will use its property instead
+    -->
       <a-entity
       class="obj"
       responsive='controller: .controller;
