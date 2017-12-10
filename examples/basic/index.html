@@ -33,14 +33,32 @@
       <!-- This is where the magic starts -->
       <!-- 
         The hoverable grabbable stretchable draggable droppable comes
-        from super-hands component -->
+        from super-hands component 
+      
+        This super simple example creates a default sphere with a 0.2 radius. 
+
+        ***IMPORTANT** Do not use semicolon (;)  to separate properties **inside the array**!!! 
+        Wrap every single property in double quotes, and separate them with a comma. 
+
+        This is wrong:
+        "value" : ["primitive:sphere;radius:0.2"]
+        
+        The problem with that is that A-Frame will parse the whole thing as an individual
+        character and will break things!!
+
+        This is correct: 
+        "value" : ["primitive:sphere","radius:0.2"]
+      -->
       <a-entity
       class="obj"
       hoverable grabbable stretchable draggable droppable
       responsive='controller: .controller;
                   _default:[{"attr":"geometry", "value":["primitive:sphere","radius:0.2"]},
                             {"attr" : "position", "value":["0 1 -1"]},
-                            {"attr" : "material", "value" : ["color:magenta"]}
+                            {"attr" : "material", "value" : ["color:magenta"]};
+                  oculus:[{"attr" : "geomtry", "value" : ["primitive:box", "height:0.1"]},
+                          {"attr" : "position", "value":["0 1 -2"]},
+                         {"attr" : "material", "value" : ["color:#00BCD4"]};
                   ]'></a-entity>
 
         

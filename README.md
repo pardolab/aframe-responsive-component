@@ -50,12 +50,35 @@ Install and use by directly including the [browser files](dist):
 <head>
   <title>My A-Frame Scene</title>
   <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+  <!-- super-hands; not needed, but recommended -->
+  <script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script>
+  <!-- The component -->
   <script src="https://unpkg.com/aframe-responsive-component@0.1.0/dist/aframe-responsive-component.min.js"></script>
 </head>
 
 <body>
   <a-scene>
-    <a-entity responsive='controller:.control ;_default:[{"attr": "geometry", "value":"sphere; radius:2" }]'></a-entity>
+    <!-- progressive-controls, not needed but recommended -->
+     <a-entity progressive-controls="objects:.obj" class="controller">
+        <a-entity id="rhand"
+          class="right-controller" collision-filter="collisionForces: false" >
+        </a-entity>
+        <a-entity id="lhand"
+          class="left-controller" collision-filter="collisionForces: false">
+        </a-entity>
+      </a-entity>
+
+    <!-- Where the magic happens -->
+      <a-entity
+      class="obj"
+      responsive='controller: .controller;
+                  _default:[{"attr":"geometry", "value":["primitive:sphere","radius:0.2"]},
+                            {"attr" : "position", "value":["0 1 -1"]},
+                            {"attr" : "material", "value" : ["color:magenta"]};
+                  oculus:[{"attr" : "geomtry", "value" : ["primitive:box", "height:0.1"]},
+                          {"attr" : "position", "value":["0 1 -2"]},
+                         {"attr" : "material", "value" : ["color:#00BCD4"]};
+                  ]'></a-entity>
   </a-scene>
 </body>
 
