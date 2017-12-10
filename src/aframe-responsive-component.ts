@@ -1,19 +1,20 @@
 /// <reference path="../typings/index.d.ts" />
+
 /**
- * Detects 
- * Thanks to wmurphyrd for his awesome progressive-controller component:
+ * This creates a responsive environment by listening to each controller that is connected. 
+ * It is strongly recommended to use it with progressive-controls component (Comes with superhands)
+ *  
+ * List of supported controllers:
+ *  ['daydream-controls', 'gearvr-controls', 'oculus-touch-controls',
+ *  'vive-controls', 'windows-motion-controls', 'default'];
+ * 
+ * Thanks to wmurphyrd for his awesome progressive-controls component:
  * https://github.com/wmurphyrd/aframe-super-hands-component/blob/2b59338672ae6f24a9663a8528dbe770ed121c33/misc_components/progressive-controls.js 
  */
 /**
  * Note, if you're asking why am I passing `this` to each of the parameters,
  * it's because that's how TypeScript statically check the functions. 
  */
-
- // List of supported controllers:
- // They're currently not used;
-// const controllerList = ['daydream-controls', 'gearvr-controls', 'oculus-touch-controls',
-//   'vive-controls', 'windows-motion-controls', 'default'];
-
 
  /**
   * interface ControllerAttrProps:
@@ -23,7 +24,7 @@
   */
   interface ControllerAttrProps {
     attr: string;
-    value: object;
+    value: string[];
   }
   
   interface Data {
@@ -66,9 +67,17 @@
    * Parses the string using JSON.parse into an array pair of attributes and
    * values, that will be inserted to the element once the controller is 
    * detected.
-   * @param value form of: [{"attr":"myComponent", "value" :"myComponentProp:a;"}]
+   * 
+   * We use this because A-Frame doesn't have a property that allows me to pass
+   * Array with objects inside of it (It parses it as strings). 
+   * 
+   * We also can't include semi-colon ; because it will parse the string into 
+   * individual characters! 
+   * 
+   * @param value form of: [{"attr":"myComponent", "value" :"[myComponentProp:a, 
+   *                                                myComponentSecondProp:b]"}]
    */
-  function parseFunction(value) {
+  function responsiveParseFunction(value) {
     if (!value || value.length === 0) return [];
   
     try {
@@ -84,23 +93,25 @@
   
   }
   
-  export default AFRAME.registerComponent('responsive', {
+  /**
+   * Registers the component. 
+   */
+  AFRAME.registerComponent('responsive', {
     // dependencies: ['progressive-controls'],
     schema: {
       controller: { type: 'selector' },
       // Can't use default because it was conflicting with A-Frame. 
       // Default will be the default property for each of the other 
       // controllers in case they aren't specified.
-      _default: { type: 'string', parse: value =>  parseFunction(value) },
-      vive: { type: 'string', parse: value =>  parseFunction(value) },
-      oculus: { type: 'string', parse: value =>  parseFunction(value) },
-      daydream: { type: 'string', parse: value =>  parseFunction(value) },
-      gearvr: { type: 'string', parse: value =>  parseFunction(value) },
-      windows: { type: 'string', parse: value =>  parseFunction(value) },
+      _default: { type: 'string', parse: value =>  responsiveParseFunction(value) },
+      vive: { type: 'string', parse: value =>  responsiveParseFunction(value) },
+      oculus: { type: 'string', parse: value =>  responsiveParseFunction(value) },
+      daydream: { type: 'string', parse: value =>  responsiveParseFunction(value) },
+      gearvr: { type: 'string', parse: value =>  responsiveParseFunction(value) },
+      windows: { type: 'string', parse: value =>  responsiveParseFunction(value) },
     },
   
     init(this: DetectController) {
-      console.log(this.data.controller);
       this.hasSetup = false;
       if (!this.data._default || this.data._default.length === 0) {
         console.warn('You need to specify at least a default property');
@@ -218,10 +229,11 @@
      * Sets the property for the active controller.
      * @param activeController The name of the controller that is active.
      */
-    setProp(activeController: string) {
+    setProp(this: DetectController, activeController: string) {
       // Removes the previous property:
       this.controlMap.get(activeController).forEach((attrProp) => {
-        this.el.setAttribute(attrProp.attr, attrProp.value);
+        const allProps = attrProp.value.join(';');
+        this.el.setAttribute(attrProp.attr, allProps);
       });
       this.activeController = activeController;
     },

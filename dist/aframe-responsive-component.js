@@ -1,25 +1,21 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 /// <reference path="../typings/index.d.ts" />
-/**
- * Detects
- * Thanks to wmurphyrd for his awesome progressive-controller component:
- * https://github.com/wmurphyrd/aframe-super-hands-component/blob/2b59338672ae6f24a9663a8528dbe770ed121c33/misc_components/progressive-controls.js
- */
-/**
- * Note, if you're asking why am I passing `this` to each of the parameters,
- * it's because that's how TypeScript statically check the functions.
- */
 /**
  * Parses the string using JSON.parse into an array pair of attributes and
  * values, that will be inserted to the element once the controller is
  * detected.
- * @param value form of: [{"attr":"myComponent", "value" :"myComponentProp:a;"}]
+ *
+ * We use this because A-Frame doesn't have a property that allows me to pass
+ * Array with objects inside of it (It parses it as strings).
+ *
+ * We also can't include semi-colon ; because it will parse the string into
+ * individual characters!
+ *
+ * @param value form of: [{"attr":"myComponent", "value" :"[myComponentProp:a,
+ *                                                myComponentSecondProp:b]"}]
  */
-function parseFunction(value) {
+function responsiveParseFunction(value) {
     if (!value || value.length === 0) return [];
     try {
         return JSON.parse(value);
@@ -29,7 +25,10 @@ function parseFunction(value) {
         return [];
     }
 }
-exports.default = AFRAME.registerComponent('responsive', {
+/**
+ * Registers the component.
+ */
+AFRAME.registerComponent('responsive', {
     // dependencies: ['progressive-controls'],
     schema: {
         controller: { type: 'selector' },
@@ -37,26 +36,25 @@ exports.default = AFRAME.registerComponent('responsive', {
         // Default will be the default property for each of the other 
         // controllers in case they aren't specified.
         _default: { type: 'string', parse: function parse(value) {
-                return parseFunction(value);
+                return responsiveParseFunction(value);
             } },
         vive: { type: 'string', parse: function parse(value) {
-                return parseFunction(value);
+                return responsiveParseFunction(value);
             } },
         oculus: { type: 'string', parse: function parse(value) {
-                return parseFunction(value);
+                return responsiveParseFunction(value);
             } },
         daydream: { type: 'string', parse: function parse(value) {
-                return parseFunction(value);
+                return responsiveParseFunction(value);
             } },
         gearvr: { type: 'string', parse: function parse(value) {
-                return parseFunction(value);
+                return responsiveParseFunction(value);
             } },
         windows: { type: 'string', parse: function parse(value) {
-                return parseFunction(value);
+                return responsiveParseFunction(value);
             } }
     },
     init: function init() {
-        console.log(this.data.controller);
         this.hasSetup = false;
         if (!this.data._default || this.data._default.length === 0) {
             console.warn('You need to specify at least a default property');
@@ -165,7 +163,8 @@ exports.default = AFRAME.registerComponent('responsive', {
 
         // Removes the previous property:
         this.controlMap.get(activeController).forEach(function (attrProp) {
-            _this.el.setAttribute(attrProp.attr, attrProp.value);
+            var allProps = attrProp.value.join(';');
+            _this.el.setAttribute(attrProp.attr, allProps);
         });
         this.activeController = activeController;
     },

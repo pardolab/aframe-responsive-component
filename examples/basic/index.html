@@ -5,7 +5,9 @@
     <title>A-Frame Responsive Component - Responsive Design based on controller input</title>
     <meta name="description" content="Responsive Design based on controller input. This will change the element's properties according to what the user has connected."></meta>
     <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
-    <script src="../../dist/aframe-responsive-component.min.js"></script>
+    <!-- Include wmurphy's super-hands-components -->
+    <script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script>
+    <script src="../../dist/aframe-responsive-component.js"></script>
   </head>
   <body>
     <a-scene>
@@ -14,8 +16,28 @@
         <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
       </a-assets>
 
-      <a-entity responsive=""></a-entity>
+      <!-- Progressive Controls from wmurphy's super-hands-component -->
+      <!-- Remember to always include an objects property, otherwise progressive-controls
+           won't be able to pick up nested elements!! -->
+      <a-entity progressive-controls="objects:.obj" class="controller">
+        <a-entity id="rhand"
+          class="right-controller" collision-filter="collisionForces: false" >
+        </a-entity>
+        <a-entity id="lhand"
+          class="left-controller" collision-filter="collisionForces: false">
+        </a-entity>
+      </a-entity>
 
+      
+      <a-entity
+      class="obj"
+      responsive='controller: .controller;
+                  _default:[{"attr":"geometry", "value":["primitive:sphere","radius:0.5"]},
+                            {"attr" : "position", "value":["0 1 -1"]},
+                            {"attr" : "material", "value" : ["color:magenta"]}
+                  ]'></a-entity>
+
+        
       <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
       <a-light type="ambient" color="#445451"></a-light>
       <a-light type="point" intensity="2" position="2 4 4"></a-light>

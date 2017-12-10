@@ -1,6 +1,6 @@
 {
   "name": "aframe-responsive-component",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Brings responsive design based on the user&#39;s controller.",
   "main": "index.js",
   "cdn": "dist/aframe-responsive-component.min.js",
