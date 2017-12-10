@@ -3,7 +3,7 @@
 [![Version](http://img.shields.io/npm/v/aframe-responsive-component.svg?style=flat-square)](https://npmjs.org/package/aframe-responsive-component)
 [![License](http://img.shields.io/npm/l/aframe-responsive-component.svg?style=flat-square)](https://npmjs.org/package/aframe-responsive-component)
 
-Brings  responsive design based on the user&#39;s controller.
+Brings  responsive design based on the user&#39;s controller. Dyanmically sets attributes (or components) to entities based on the current connected controller.
 
 For [A-Frame](https://aframe.io).
 
