@@ -7,6 +7,10 @@ Brings  responsive design based on the user&#39;s controller. Dyanmically sets a
 
 For [A-Frame](https://aframe.io).
 
+<img src="./images/comparison-min.png" alt="Comparison between controllers"/>
+<p style="text-align:center;"><i>Same code, different output depending on the connected device. Works with most components and attributes.</i></p>
+
+
 This is akin to media queries, but with the controllers. This component listens to controller connection, and sets a property according to the supported type of controller (Oculus Touch, Vive, Daydream, Mixed Reality, Gaze).
 
 This means that you can tailor specific experiences to each one of the devices without rewriting your code. From tutorials to how the world is laid out. 
@@ -37,8 +41,13 @@ This works by passing a JSON Array to the component, parsing it, and then listen
 <a-entity responsive='controller:.controller ; _default:[{"attr": "myComponent", "value": ["myComponent\'s Value"]}]'></a-entity>
 ```
 
-#### Note:
-`_default` was used instead of `default` because the latter was conflicting with A-Frame when reading the component's schema.
+#### Notes and important details:
+* `_default` was used instead of `default` because the latter was conflicting with A-Frame when reading the component's schema.
+* You must use double quotes `""` for the key and value. Single quotes `''` will not work
+* Do not use semicolon `;` to put multiple properties inside the value key from the array. Doing so will not parse correctly. Ex: [{"attr": "geometry", "value": ["primitive:box; height:0.5;"]}]. Correct: [{"attr": "geometry", "value": ["primitive:box", "height:0.5"]}] (Note: no `;` to separate the component's values.)
+* Do not put a trailing comma at the last object in the array Ex: [{"attr": "myComponent", "value": ["myComponent's Value"]},] (Check the last comma), this will not parse correctly. 
+* Think as of valid JSON that needs to be passed as [{"attr": "myComponent", "value": ["myComponent's Value"]}] 
+
 
 ### Installation
 
@@ -75,13 +84,10 @@ Install and use by directly including the [browser files](dist):
       <a-entity
       class="obj"
       responsive='controller: .controller;
-                  _default:[{"attr":"geometry", "value":["primitive:sphere","radius:0.2"]},
-                            {"attr" : "position", "value":["0 1 -1"]},
-                            {"attr" : "material", "value" : ["color:magenta"]};
-                  oculus:[{"attr" : "geomtry", "value" : ["primitive:box", "height:0.1"]},
-                          {"attr" : "position", "value":["0 1 -2"]},
-                         {"attr" : "material", "value" : ["color:#00BCD4"]};
-                  ]'></a-entity>
+                  _default:[{"attr":"geometry", "value":["primitive:sphere","radius:0.2"]}];
+
+                  oculus:[{"attr" : "geomtry", "value" : ["primitive:box", "height:0.1"]}
+                         {"attr" : "material", "value" : ["color:#00BCD4"]}];'></a-entity>
   </a-scene>
 </body>
 

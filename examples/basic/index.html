@@ -48,18 +48,30 @@
 
         This is correct: 
         "value" : ["primitive:sphere","radius:0.2"]
+
+        It's strongly recommended to verify that the JSON is valid, since it's very easy
+        to break.
       -->
+
+
+      <a-text value="Dynamically Connect a Controller " position="0 2.5 -2" align="center" material="side:double"></a-text>
+      <a-text position="0 2 -2"
+              scale="0.5 0.5 0.5"
+              align="center"
+              responsive='controller: .controller;
+                _default:[{"attr" : "value", "value" : ["With your mouse, click where the circle is aiming, and drag it around the screen"] }];
+                oculus:[{"attr" : "value", "value" : ["With your Oculus, grab the particle and move it around by pressing the trigger"] }];
+              '
+              ></a-text>
       <a-entity
       class="obj"
       hoverable grabbable stretchable draggable droppable
+      position="0 1.5 -1"
       responsive='controller: .controller;
-                  _default:[{"attr":"geometry", "value":["primitive:sphere","radius:0.2"]},
-                            {"attr" : "position", "value":["0 1 -1"]},
-                            {"attr" : "material", "value" : ["color:magenta"]};
-                  oculus:[{"attr" : "geomtry", "value" : ["primitive:box", "height:0.1"]},
-                          {"attr" : "position", "value":["0 1 -2"]},
-                         {"attr" : "material", "value" : ["color:#00BCD4"]};
-                  ]'></a-entity>
+                  _default:[{"attr":"geometry", "value":["primitive:sphere","radius:0.2"]} 
+                  ];
+                  oculus:[{"attr" : "geomtry", "value" : ["primitive:box", "height:0.1"]}
+                         {"attr" : "material", "value" : ["color:#00BCD4"]}];'></a-entity>
 
         
       <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
