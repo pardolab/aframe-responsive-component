@@ -29,7 +29,7 @@ gulp.task('tsmin', (cb) => {
           }),
         uglify(),
         rename({
-            suffix: '-min'
+            suffix: '.min'
         }),
         gulp.dest(buildDir)
     ],

@@ -59,12 +59,12 @@
     "randomcolor": "^0.4.4",
     "semistandard": "^8.0.0",
     "shelljs": "^0.7.0",
+    "shx": "^0.1.1",
     "sinon": "^1.17.5",
     "sinon-chai": "^2.8.0",
+    "snazzy": "^4.0.0",
     "tslint": "^5.8.0",
     "tslint-config-airbnb": "^5.3.0",
-    "shx": "^0.1.1",
-    "snazzy": "^4.0.0",
     "webpack": "^1.13.0"
   },
   "semistandard": {
@@ -76,5 +76,12 @@
       "examples/build.js",
       "dist/**"
     ]
+  },
+  "dependencies": {
+    "@types/three": "^0.84.35",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "pump": "^2.0.0",
+    "typescript": "^2.6.2"
   }
 }

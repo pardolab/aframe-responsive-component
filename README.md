@@ -26,19 +26,19 @@ This works really well with <a href="https://github.com/wmurphyrd/aframe-super-h
 |vive | Optional | Array of properties to be set when the HTC Vive controller is connected. | The array of properties you specified in _default |
 |gearvr | Optional | Array of properties to be set when the GearVR controller is connected. | The array of properties you specified in _default |
 |windows | Optional | Array of properties to be set when a Windows Mixed Reality controller is connected. | The array of properties you specified in _default |
-|[{"attr": "myComponent", "value": "myComponent's Value"}] | Mandatory | This is the values of each of the properties specified above. <br/><br/><br/><span style="color:#f44336">Important!</span> Each key-value pair **must be enclosed in double quotes or it won't work**. | No defaults. Must be used |
+|[{"attr": "myComponent", "value": "myComponent's Value"}] | Mandatory | This is the key-value pair of each of the properties specified above. <br/><br/><br/><span style="color:#f44336">Important!</span> Each key-value pair **must be enclosed in double quotes or it won't work**. | No defaults. Must be used |
 
 
 ### How to use:
 
-This works by passing a JSON Array to the component, parsing it, and then listenining for each `controllerconnected` and `controllerdisconnected` events, and setting it for the right controller. You **must** pass it with the form of:
+This works by passing a JSON Array to the component, parsing it, and then listening for each `controllerconnected` and `controllerdisconnected` events, and setting it for the right controller. You **must** pass it with the form of:
 
 ```html
-<a-entity responsive='[{"attr": "myComponent", "value": "myComponent\'s Value"}]'
+<a-entity responsive='controller:.controller ; _default:[{"attr": "myComponent", "value": "myComponent\'s Value"}]'></a-entity>
 ```
 
 #### Note:
-`_default` was used vs `default` because it was conflicting with A-Frame when reading the component's schema.
+`_default` was used instead of `default` because the latter was conflicting with A-Frame when reading the component's schema.
 
 ### Installation
 
@@ -55,7 +55,7 @@ Install and use by directly including the [browser files](dist):
 
 <body>
   <a-scene>
-    <a-entity responsive='_default:[{"attr": }]'></a-entity>
+    <a-entity responsive='controller:.control ;_default:[{"attr": "geometry", "value":"sphere; radius:2" }]'></a-entity>
   </a-scene>
 </body>
 
