@@ -1,6 +1,6 @@
 {
   "name": "aframe-responsive-component",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Brings responsive design based on the user&#39;s controller.",
   "main": "index.js",
   "cdn": "dist/aframe-responsive-component.min.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pardolab/aframe-responsive-componentt.git"
+    "url": "git+https://github.com/pardolab/aframe-responsive-component.git"
   },
   "keywords": [
     "aframe",

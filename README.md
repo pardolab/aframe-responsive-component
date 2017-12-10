@@ -78,7 +78,8 @@ Install and use by directly including the [browser files](dist):
       </a-entity>
 
     <!-- Where the magic happens -->
-    <!-- Oculus will overwrite default when an oculus touch controller is connected. 
+    <!-- Oculus will overwrite the default when an oculus touch controller is connected. No, if you want to share a component between all the controllers 
+    don't include it in responsive component.
         If any other controller is connected, it will use its property instead
     -->
       <a-entity
