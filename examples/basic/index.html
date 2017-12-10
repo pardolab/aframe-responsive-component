@@ -29,10 +29,16 @@
       </a-entity>
 
       
+
+      <!-- This is where the magic starts -->
+      <!-- 
+        The hoverable grabbable stretchable draggable droppable comes
+        from super-hands component -->
       <a-entity
       class="obj"
+      hoverable grabbable stretchable draggable droppable
       responsive='controller: .controller;
-                  _default:[{"attr":"geometry", "value":["primitive:sphere","radius:0.5"]},
+                  _default:[{"attr":"geometry", "value":["primitive:sphere","radius:0.2"]},
                             {"attr" : "position", "value":["0 1 -1"]},
                             {"attr" : "material", "value" : ["color:magenta"]}
                   ]'></a-entity>

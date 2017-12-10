@@ -191,7 +191,8 @@
         Please add a controllerSelector property to continue, and match the controllers.`);
         return;
       }
-      controller.addEventListener('controllerconnected', this.processControllerConnection.bind(this));
+      controller.addEventListener('controllerconnected', 
+                                  this.processControllerConnection.bind(this));
       controller.addEventListener('controllerdisconnected',
                                   this.processControllerConnection.bind(this));
     },

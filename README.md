@@ -50,7 +50,7 @@ Install and use by directly including the [browser files](dist):
 <head>
   <title>My A-Frame Scene</title>
   <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
-  <script src="https://unpkg.com/aframe-responsive-component/dist/aframe-responsive-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-responsive-component@0.1.0/dist/aframe-responsive-component.min.js"></script>
 </head>
 
 <body>
