@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+      "noImplicitAny": false,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata":  true,
+      "removeComments": true,
+      "sourceMap": true,
+      "target": "ESNext",
+      "allowJs": true,
+      "lib" : ["dom", "es2017", "esnext"]
+    },
+    "exclude": [
+      "node_modules",
+      "app/interfaces",
+      "app/typings",
+      "app/server",
+      "__tests__"
+      
+    ]
+    
+  }
+  
