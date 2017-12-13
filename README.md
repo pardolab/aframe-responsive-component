@@ -7,6 +7,12 @@ Brings  responsive design based on the user&#39;s controller. Dyanmically sets a
 
 For [A-Frame](https://aframe.io).
 
+<img src="./images/controllers.gif" alt="Menu changes when oculus rift is connected"  width="100%" height="auto"/>
+
+The whole menu changes when the Oculus Rift is connected. (See how the gazer disappears) 
+
+Controller isn't shown, because it was recorded without first entering VR (and the Rift doesn't seem to kick in completely)
+
 <img src="./images/comparison-min.png" alt="Comparison between controllers"/>
 <p style="text-align:center;"><i>Same code, different output depending on the connected device. Works with most components and attributes.</i></p>
 
